@@ -10,6 +10,21 @@ function App() {
     { name: "Diana", age: 19, grade: "D" },
   ];
 
+  const filterByAge = (minAge) => {
+    const filterAge = initialStudents.filter(
+      (student) => student.age >= minAge
+    );
+    setFilteredStudents(filterAge);
+  };
+  const filterByGrade = (grade) => {
+    const filterGrade = initialStudents.filter(
+      (student) => student.grade === grade
+    );
+    setFilteredStudents(filterGrade);
+  };
+  const resetFilter = () => {
+    setFilteredStudents(initialStudents);
+  };
   const [filteredStudents, setFilteredStudents] = useState(initialStudents);
 
   return (
@@ -17,12 +32,15 @@ function App() {
       <h1>학생 목록</h1>
       {/* TODO: FilterButtons 컴포넌트를 작성하고 필요한 props를 전달하세요. */}
       <FilterButtons
-      /* 필요한 props를 여기에 전달하세요. */
+        filterByAge={filterByAge}
+        filterByGrade={filterByGrade}
+        resetFilter={resetFilter}
       />
 
       {/* TODO: StudentList 컴포넌트를 작성하고 필요한 props를 전달하세요. */}
       <StudentList
-      /* 필요한 props를 여기에 전달하세요. */
+        initialStudents={filteredStudents}
+        /* 필요한 props를 여기에 전달하세요. */
       />
     </div>
   );
